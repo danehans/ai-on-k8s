@@ -108,16 +108,7 @@ Example: Use a `PyTorchJob` CRD with 4 workers + 1 master using GPUs.
 
 #### 6.2.1 Advanced Scheduling with LWS
 
-[LWS (Lightweight Workload Scheduler)](https://lws.sigs.k8s.io) is a Kubernetes-native scheduler designed for latency-sensitive, GPU-intensive jobs like LLM training and inference. It supports:
-
-- Job admission based on custom policies
-- Co-scheduling for multi-GPU jobs
-- Integration with Kueue, Volcano, and JobSets
-
-LWS is particularly useful for:
-- Long-running distributed training jobs (e.g., with NCCL or Tensor Parallelism)
-- Managing backpressure when GPUs are oversubscribed
-- Replacing custom queueing logic in complex workloads
+[LWS (LeaderWorkerSet)](https://lws.sigs.k8s.io) is a deployment API that uses the k8s StatefulSet API as a building block to address common deployment patterns of AI/ML inference workloads, especially multi-host inference workloads where the LLM will be sharded and run across devices. It manages replicas of a “super pod” (referred to as a group), the super pod is a group of pods treated as a unit.
 
 ### 6.4 Multi-Model Serving
 
